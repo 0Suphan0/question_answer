@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:question_answer/constants.dart';
 
 void main() => runApp(BilgiTesti());
 
@@ -24,6 +25,12 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
+
+ List<Widget> icons=[
+ 
+ ];
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,6 +53,8 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             ),
           ),
         ),
+        Expanded(child: Row(children: icons,))
+        ,
         Expanded(
           flex: 1,
           child: Padding(
@@ -63,7 +72,12 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                             size: 30.0,
                             color: Colors.white, // Icon rengi
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              
+                            });
+                            icons.add(iconBadMood);
+                          },
                         ))),
                 Expanded(
                     child: Padding(
@@ -77,7 +91,13 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                             size: 30.0,
                             color: Colors.white, // Icon rengi
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                          setState(() {
+                            
+                          });
+                          icons.add(iconMood);
+
+                          },
                         ))),
               ])),
         )
