@@ -25,11 +25,7 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
-
- List<Widget> icons=[
- 
- ];
-
+  List<Widget> icons = [];
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +49,12 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
             ),
           ),
         ),
-        Expanded(child: Row(children: icons,))
-        ,
+        Expanded(
+            child: Wrap(
+          children: icons,
+          spacing: 3,
+          runSpacing: 3,
+        )),
         Expanded(
           flex: 1,
           child: Padding(
@@ -73,9 +73,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                             color: Colors.white, // Icon rengi
                           ),
                           onPressed: () {
-                            setState(() {
-                              
-                            });
+                            setState(() {});
                             icons.add(iconBadMood);
                           },
                         ))),
@@ -92,11 +90,8 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                             color: Colors.white, // Icon rengi
                           ),
                           onPressed: () {
-                          setState(() {
-                            
-                          });
-                          icons.add(iconMood);
-
+                            setState(() {});
+                            icons.add(iconMood);
                           },
                         ))),
               ])),
