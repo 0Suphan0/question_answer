@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:question_answer/constants.dart';
+import 'package:question_answer/question.dart';
 
 void main() => runApp(BilgiTesti());
 
@@ -25,7 +26,26 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
+  List<Question> questions = [];
   List<Widget> icons = [];
+  int questionCounter = 0;
+  int questionLenght = 0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    icons = [];
+    questions = [
+      Question(0, "Titanic gelmiş geçmiş en büyük gemidir.", false),
+      Question(1, "Dünyadaki tavuk sayısı insan sayısından fazladır.", true),
+      Question(2, "Kelebeklerin ömrü bir gündür.", false),
+      Question(3, "Dünya düzdür.", false),
+      Question(4, "Kaju fıstığı aslında bir meyvenin sapıdır.", true),
+      Question(5, "Fatih Sultan Mehmet hiç patates yememiştir.", true),
+    ];
+    questionLenght = questions.length;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +54,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         const Expanded(
-          flex: 4,
+          flex: 1,
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
@@ -50,11 +70,16 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
           ),
         ),
         Expanded(
+          flex: 3,
+          child: Center(child: Text(questions[questionCounter].question ?? "")),
+        ),
+        Expanded(
+            flex: 1,
             child: Wrap(
-          children: icons,
-          spacing: 3,
-          runSpacing: 3,
-        )),
+              children: icons,
+              spacing: 3,
+              runSpacing: 3,
+            )),
         Expanded(
           flex: 1,
           child: Padding(
@@ -74,7 +99,19 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           ),
                           onPressed: () {
                             setState(() {});
-                            icons.add(iconBadMood);
+                            if (questions[questionCounter].isTrue == false) {
+                              if (questionCounter < questionLenght-1) {
+                                questionCounter++;
+                                icons.add(iconMood);
+
+                              }
+                            } else {
+                              if (questionCounter < questionLenght-1 ) {
+                                questionCounter++;
+                                icons.add(iconBadMood);
+                                
+                              }
+                            }
                           },
                         ))),
                 Expanded(
@@ -91,7 +128,19 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           ),
                           onPressed: () {
                             setState(() {});
-                            icons.add(iconMood);
+                            if (questions[questionCounter].isTrue == true) {
+                              if (questionCounter < questionLenght-1 ) {
+                                questionCounter++;
+                                icons.add(iconMood);
+                                
+                              }
+                            } else {
+                              if (questionCounter < questionLenght-1) {
+                                questionCounter++;
+                                icons.add(iconBadMood);
+                                
+                              }
+                            }
                           },
                         ))),
               ])),
