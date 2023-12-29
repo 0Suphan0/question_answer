@@ -4,11 +4,7 @@ class Question {
   String? question;
   bool? isTrue;
 
-  Question(int? questionId,String? question, bool? isTrue){
-    this.questionId=questionId;
-    this.question=question;
-    this.isTrue=isTrue;
-  }
+  Question({this.questionId,this.question,this.isTrue});
 
 
 }
