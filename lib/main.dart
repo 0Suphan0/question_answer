@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:question_answer/constants.dart';
 import 'package:question_answer/question.dart';
-import 'package:question_answer/questionList.dart';
+import 'package:question_answer/question_operation.dart';
 
 void main() => runApp(BilgiTesti());
 
@@ -27,18 +27,15 @@ class SoruSayfasi extends StatefulWidget {
 }
 
 class _SoruSayfasiState extends State<SoruSayfasi> {
-  QuestionList questionList = QuestionList();
+  QuestionOperation questionOperation = QuestionOperation();
 
   List<Widget> icons = [];
-  int questionCounter = 0;
   int questionLenght = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    questionLenght = questionList.questions.length;
-
     icons = [];
   }
 
@@ -66,9 +63,7 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
         ),
         Expanded(
           flex: 3,
-          child: Center(
-              child:
-                  Text(questionList.questions[questionCounter].question ?? "")),
+          child: Center(child: Text(questionOperation.getQuestion() ?? "")),
         ),
         Expanded(
             flex: 1,
@@ -96,18 +91,12 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           ),
                           onPressed: () {
                             setState(() {});
-                            if (questionList
-                                    .questions[questionCounter].isTrue ==
-                                false) {
-                              if (questionCounter < questionLenght - 1) {
-                                questionCounter++;
-                                icons.add(iconMood);
-                              }
+                            if (questionOperation.getTrueFalse() == false) {
+                              icons.add(iconMood);
+                              questionOperation.incCounter();
                             } else {
-                              if (questionCounter < questionLenght - 1) {
-                                questionCounter++;
-                                icons.add(iconBadMood);
-                              }
+                              icons.add(iconBadMood);
+                              questionOperation.incCounter();
                             }
                           },
                         ))),
@@ -125,18 +114,12 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           ),
                           onPressed: () {
                             setState(() {});
-                            if (questionList
-                                    .questions[questionCounter].isTrue ==
-                                true) {
-                              if (questionCounter < questionLenght - 1) {
-                                questionCounter++;
-                                icons.add(iconMood);
-                              }
+                            if (questionOperation.getTrueFalse() == true) {
+                              icons.add(iconMood);
+                              questionOperation.incCounter();
                             } else {
-                              if (questionCounter < questionLenght - 1) {
-                                questionCounter++;
-                                icons.add(iconBadMood);
-                              }
+                              icons.add(iconBadMood);
+                              questionOperation.incCounter();
                             }
                           },
                         ))),
