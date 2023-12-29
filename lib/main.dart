@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:question_answer/constants.dart';
-import 'package:question_answer/question.dart';
 import 'package:question_answer/question_operation.dart';
+import 'package:question_answer/question.dart';
 
 void main() => runApp(BilgiTesti());
 
