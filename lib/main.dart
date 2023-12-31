@@ -63,7 +63,11 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
         ),
         Expanded(
           flex: 3,
-          child: Center(child: Text(questionOperation.getQuestion() ?? "")),
+          child: Center(
+              child: Text(
+            questionOperation.getQuestion() ?? "",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          )),
         ),
         Expanded(
             flex: 1,
@@ -92,11 +96,23 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           onPressed: () {
                             setState(() {});
                             if (questionOperation.getTrueFalse() == false) {
-                              icons.add(iconMood);
-                              questionOperation.incCounter();
+                              if (questionOperation.isQuestionEnd() == true) {
+                                //alert.
+                                _showMyDialog();
+                                print("alert");
+                              } else {
+                                icons.add(iconMood);
+                                questionOperation.incCounter();
+                              }
                             } else {
-                              icons.add(iconBadMood);
-                              questionOperation.incCounter();
+                              if (questionOperation.isQuestionEnd() == true) {
+                                //alert.
+                                _showMyDialog();
+                                print("alert");
+                              } else {
+                                icons.add(iconBadMood);
+                                questionOperation.incCounter();
+                              }
                             }
                           },
                         ))),
@@ -115,11 +131,23 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
                           onPressed: () {
                             setState(() {});
                             if (questionOperation.getTrueFalse() == true) {
-                              icons.add(iconMood);
-                              questionOperation.incCounter();
+                              if (questionOperation.isQuestionEnd() == true) {
+                                //alert.
+                                _showMyDialog();
+                                print("alert");
+                              } else {
+                                icons.add(iconMood);
+                                questionOperation.incCounter();
+                              }
                             } else {
-                              icons.add(iconBadMood);
-                              questionOperation.incCounter();
+                              if (questionOperation.isQuestionEnd() == true) {
+                                //alert.
+                                _showMyDialog();
+                                print("alert");
+                              } else {
+                                icons.add(iconBadMood);
+                                questionOperation.incCounter();
+                              }
                             }
                           },
                         ))),
@@ -128,4 +156,39 @@ class _SoruSayfasiState extends State<SoruSayfasi> {
       ],
     );
   }
+Future<void> _showMyDialog() async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Sorular Tamamlandı!'),
+        content: const SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text('Sorular Tamamlandı'),
+              Text('Baştan başlamak ister misiniz ?'),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Evet'),
+            onPressed: () {
+              Navigator.of(context).pop();
+              setState(() {
+                
+              });
+              questionOperation.restartGame();
+              icons.clear();
+
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
+
+}
+

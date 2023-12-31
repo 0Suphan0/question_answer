@@ -1,7 +1,6 @@
 import 'package:question_answer/question.dart';
 
 class QuestionOperation {
-
   int questionCounter = 0;
   final List<Question> _questions = [
     Question(
@@ -31,17 +30,29 @@ class QuestionOperation {
     return _questions;
   }
 
-  String? getQuestion(){
+  String? getQuestion() {
     return _questions[questionCounter].question;
   }
 
-  bool? getTrueFalse(){
+  bool? getTrueFalse() {
     return _questions[questionCounter].isTrue;
   }
 
-  void incCounter(){
-    if(questionCounter<_questions.length-1)
-    questionCounter++;
+  void incCounter() {
+    if (questionCounter < _questions.length - 1) {
+      questionCounter++;
+    }
   }
 
+  bool isQuestionEnd() {
+    if (questionCounter + 1 >= _questions.length) {
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  void restartGame(){
+    questionCounter=0;
+  }
 }
